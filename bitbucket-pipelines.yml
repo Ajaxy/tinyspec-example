@@ -1,0 +1,32 @@
+image: node:8.10.0
+
+pipelines:
+  master:
+    - step:
+        name: Build Documentation
+        image: atlassian/default-image:2 # Required to access to `/usr/bin/java` and `ruby` (for gems).
+        caches:
+          - node
+        script:
+          - npm i
+          - apt-get update
+          - apt-get install rubygems -y
+          - gem install asciidoctor
+          - export ENV=dev
+          - export VERSION=$(node -p -e "require('./package.json').version")
+          - export HOST=api.example.com
+          - npm run docs
+        artifacts:
+          - docs/*
+    - step:
+        name: Deploy Documentation
+        image: python:3.6 # Required to access `pip`.
+        caches:
+          - pip
+        script:
+          - pip install awscli --upgrade
+          - export ENV=dev
+          - export AWS_REGION=ap-southeast-1
+          - export AWS_ACCESS_KEY_ID=$AWS_DEV_ACCESS_KEY_ID
+          - export AWS_SECRET_ACCESS_KEY=$AWS_DEV_SECRET_ACCESS_KEY
+          - aws s3 --region $AWS_REGION cp docs/ s3://docs.example.com/api/$ENV --recursive --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate

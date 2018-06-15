@@ -1,0 +1,6 @@
+Agent endpoints:
+    // **List** and search _widgets_
+    @token GET /widgets?filter?:h&search?&page?:i&perPage?:i
+        => {widgets: Widget[], totalCount: i}
+
+    @token $CRUD /widgets

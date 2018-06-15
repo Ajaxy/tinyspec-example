@@ -1,0 +1,1548 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Example API v2",
+    "description": "This document describes HTTP REST JSON API located at https://{{host}}/api/v2\nand used by **Example** mobile and desktop clients.\n\nAn actual version of this document is published online: https://docs.example.com/api/{{environment}}",
+    "version": "{{version}}"
+  },
+  "host": "{{host}}",
+  "basePath": "/api/v2",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "token": {
+      "name": "X-Access-Token",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/companies (agent)": {
+      "get": {
+        "summary": "**List** and search _companies_",
+        "description": "**List** and search _companies_",
+        "operationId": "GET--companies--agent",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companies": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Company"
+                  }
+                },
+                "totalCount": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "companies",
+                "totalCount"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "required": false,
+            "type": "object",
+            "description": "Schema: [`CompanyFilter`](#_companyfilter) (stringified)",
+            "in": "query"
+          },
+          {
+            "name": "search",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "name": "sort",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          }
+        ]
+      }
+    },
+    "/companies": {
+      "post": {
+        "summary": "**Create** new `Company`",
+        "description": "**Create** new [`Company`](#/definitions/Company)",
+        "operationId": "POST--companies",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "success",
+                "id"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "$ref": "#/definitions/CompanyNew"
+                }
+              },
+              "required": [
+                "company"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      }
+    },
+    "/companies/:id": {
+      "get": {
+        "summary": "**Retrieve** particular `Company`",
+        "description": "**Retrieve** particular [`Company`](#/definitions/Company)",
+        "operationId": "GET--companies--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "$ref": "#/definitions/Company"
+                }
+              },
+              "required": [
+                "company"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      },
+      "patch": {
+        "summary": "**Update** particular `Company`",
+        "description": "**Update** particular [`Company`](#/definitions/Company)",
+        "operationId": "PATCH--companies--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "$ref": "#/definitions/CompanyUpdate"
+                }
+              },
+              "required": [
+                "company"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "**Delete** particular `Company`",
+        "description": "**Delete** particular [`Company`](#/definitions/Company)",
+        "operationId": "DELETE--companies--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/companies (client)": {
+      "get": {
+        "summary": "**List** all own _companies_",
+        "description": "**List** all own _companies_",
+        "operationId": "GET--companies--client",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "companies": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Company"
+                  }
+                }
+              },
+              "required": [
+                "companies"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Client endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      }
+    },
+    "/companies/:companyId/conversations (agent)": {
+      "get": {
+        "summary": "**List** _conversations_ for a _company_",
+        "description": "**List** _conversations_ for a _company_",
+        "operationId": "GET--companies--companyId--conversations--agent",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "conversations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Conversation"
+                  }
+                }
+              },
+              "required": [
+                "conversations"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/companies/:companyId/conversations (client)": {
+      "get": {
+        "summary": "**List** own _conversations_ for an own _company_",
+        "description": "**List** own _conversations_ for an own _company_",
+        "operationId": "GET--companies--companyId--conversations--client",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "conversations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Conversation"
+                  }
+                }
+              },
+              "required": [
+                "conversations"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Client endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/conversations/:id/markAsAnswered": {
+      "post": {
+        "summary": "**Mark** _conversation_ as answered",
+        "description": "**Mark** _conversation_ as answered",
+        "operationId": "POST--conversations--id--markAsAnswered",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "conversation": {
+                  "$ref": "#/definitions/Conversation"
+                }
+              },
+              "required": [
+                "conversation"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/roles": {
+      "get": {
+        "summary": "**List** available `Role` _records_",
+        "description": "**List** available [`Role`](#/definitions/Role) _records_",
+        "operationId": "GET--roles",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "roles": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Role"
+                  }
+                }
+              },
+              "required": [
+                "roles"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "**Create** new `Role`",
+        "description": "**Create** new [`Role`](#/definitions/Role)",
+        "operationId": "POST--roles",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "success",
+                "id"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "$ref": "#/definitions/RoleNew"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      }
+    },
+    "/roles/:id": {
+      "get": {
+        "summary": "**Retrieve** particular `Role`",
+        "description": "**Retrieve** particular [`Role`](#/definitions/Role)",
+        "operationId": "GET--roles--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "$ref": "#/definitions/Role"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      },
+      "patch": {
+        "summary": "**Update** particular `Role`",
+        "description": "**Update** particular [`Role`](#/definitions/Role)",
+        "operationId": "PATCH--roles--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "$ref": "#/definitions/RoleUpdate"
+                }
+              },
+              "required": [
+                "role"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "**Delete** particular `Role`",
+        "description": "**Delete** particular [`Role`](#/definitions/Role)",
+        "operationId": "DELETE--roles--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    },
+    "/signup/guest": {
+      "post": {
+        "summary": "**Create** guest _user_ and _company_",
+        "description": "**Create** guest _user_ and _company_",
+        "operationId": "POST--signup--guest",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "token": {
+                  "type": "string"
+                },
+                "user": {
+                  "$ref": "#/definitions/UserClientSelf"
+                }
+              },
+              "required": [
+                "token",
+                "user"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Client endpoints"
+        ]
+      }
+    },
+    "/widgets": {
+      "get": {
+        "summary": "**List** and search _widgets_",
+        "description": "**List** and search _widgets_",
+        "operationId": "GET--widgets",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "widgets": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Widget"
+                  }
+                },
+                "totalCount": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "widgets",
+                "totalCount"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "filter",
+            "required": false,
+            "type": "object",
+            "in": "query"
+          },
+          {
+            "name": "search",
+            "required": false,
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "page",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          },
+          {
+            "name": "perPage",
+            "required": false,
+            "type": "integer",
+            "in": "query"
+          }
+        ]
+      },
+      "post": {
+        "summary": "**Create** new `Widget`",
+        "description": "**Create** new [`Widget`](#/definitions/Widget)",
+        "operationId": "POST--widgets",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "id": {
+                  "type": "integer"
+                }
+              },
+              "required": [
+                "success",
+                "id"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "widget": {
+                  "$ref": "#/definitions/WidgetNew"
+                }
+              },
+              "required": [
+                "widget"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      }
+    },
+    "/widgets/:id": {
+      "get": {
+        "summary": "**Retrieve** particular `Widget`",
+        "description": "**Retrieve** particular [`Widget`](#/definitions/Widget)",
+        "operationId": "GET--widgets--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "widget": {
+                  "$ref": "#/definitions/Widget"
+                }
+              },
+              "required": [
+                "widget"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      },
+      "patch": {
+        "summary": "**Update** particular `Widget`",
+        "description": "**Update** particular [`Widget`](#/definitions/Widget)",
+        "operationId": "PATCH--widgets--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          },
+          {
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "widget": {
+                  "$ref": "#/definitions/WidgetUpdate"
+                }
+              },
+              "required": [
+                "widget"
+              ]
+            },
+            "in": "body"
+          }
+        ]
+      },
+      "delete": {
+        "summary": "**Delete** particular `Widget`",
+        "description": "**Delete** particular [`Widget`](#/definitions/Widget)",
+        "operationId": "DELETE--widgets--id",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                }
+              },
+              "required": [
+                "success"
+              ]
+            }
+          }
+        },
+        "tags": [
+          "Agent endpoints"
+        ],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "in": "path"
+          }
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Agent endpoints"
+    },
+    {
+      "name": "Client endpoints"
+    }
+  ],
+  "definitions": {
+    "Company": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "companyName": {
+          "type": "string"
+        },
+        "companyStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dormant": {
+          "type": "boolean"
+        },
+        "industry": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "logo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dealStatus": {
+          "type": "string"
+        },
+        "pipelineStage": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "companyName",
+        "dormant",
+        "industry",
+        "size",
+        "status",
+        "color",
+        "dealStatus",
+        "pipelineStage",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "CompanyNew": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string"
+        },
+        "companyStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dormant": {
+          "type": "boolean"
+        },
+        "industry": {
+          "type": "string"
+        },
+        "size": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "logo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dealStatus": {
+          "type": "string"
+        },
+        "pipelineStage": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "companyName",
+        "dormant",
+        "industry",
+        "size",
+        "status",
+        "color",
+        "dealStatus",
+        "pipelineStage"
+      ],
+      "additionalProperties": false
+    },
+    "CompanyUpdate": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "companyStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dormant": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "industry": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "size": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "status": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "color": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "logo": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "dealStatus": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "pipelineStage": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "CompanyFilter": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false
+    },
+    "Conversation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "companyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "userId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "facebookId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "slackId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "slackTeamId": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coverUrl": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "isAnswered": {
+          "type": "boolean"
+        },
+        "firstUnansweredMessageAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "lastMessageAt": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "externalId",
+        "isAnswered",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Role": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "status": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "companyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "channelIds": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "status",
+        "permissions",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "RoleNew": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "permissions"
+      ],
+      "additionalProperties": false
+    },
+    "RoleUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "permissions": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "companyId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "channelIds": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "UserSafeData": {
+      "type": "object",
+      "properties": {
+        "sendBirdAccessToken": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "sendBirdAccessToken"
+      ]
+    },
+    "UserClientSelf": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "role": {
+          "type": "integer"
+        },
+        "sendBirdId": {
+          "type": "string"
+        },
+        "safeData": {
+          "$ref": "#/definitions/UserSafeData"
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "phoneNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "firstName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "lastName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "idName": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "avatar": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "card": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nric": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nationality": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "nickname": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documentNumber": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "documentType": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "birthdate": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date-time"
+        },
+        "sex": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "residentialAddress": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "companiesOrder": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "role",
+        "sendBirdId",
+        "safeData"
+      ]
+    },
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "widgetCategoryId": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type",
+        "widgetCategoryId"
+      ]
+    },
+    "WidgetNew": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "widgetCategoryId": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "widgetCategoryId"
+      ],
+      "additionalProperties": false
+    },
+    "WidgetUpdate": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "widgetCategoryId": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,5 @@
+Widget {id: i, name, type, widgetCategoryId: i}
+
+WidgetNew < Widget !{-id}
+
+WidgetUpdate !{name?, type?, widgetCategoryId?: i}

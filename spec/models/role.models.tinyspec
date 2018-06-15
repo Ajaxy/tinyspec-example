@@ -1,0 +1,5 @@
+Role {id: i, name, type?, status, permissions: s[], companyId?: i, channelIds?: i[], createdAt: d, updatedAt: d}
+
+RoleNew < Role !{-id, -status, -companyId, -channelIds, -createdAt, -updatedAt}
+
+RoleUpdate !{name?, type?, permissions?: s[], companyId?: i, channelIds?: i[]}

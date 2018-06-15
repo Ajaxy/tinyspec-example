@@ -1,0 +1,4 @@
+Agent endpoints:
+    // **Mark** _conversation_ as answered
+    @token POST /conversations/:id/markAsAnswered
+        => {conversation: Conversation}

@@ -1,0 +1,7 @@
+Company {id: i, companyName, companyStatus?, dormant: b, industry, size: i, status, color, logo?, dealStatus, pipelineStage, createdAt: d, updatedAt: d}
+
+CompanyNew < Company !{-id, -createdAt, -updatedAt}
+
+CompanyUpdate !{companyName?, companyStatus?, dormant?: b, industry?, size?: i, status?, color?, logo?, dealStatus?, pipelineStage?}
+
+CompanyFilter !{status}

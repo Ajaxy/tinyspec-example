@@ -1,0 +1,9 @@
+Agent endpoints:
+    // **List** _conversations_ for a _company_
+    @token GET /companies/:companyId/conversations (agent)
+        => {conversations: Conversation[]}
+
+Client endpoints:
+    // **List** own _conversations_ for an own _company_
+    @token GET /companies/:companyId/conversations (client)
+        => {conversations: Conversation[]}

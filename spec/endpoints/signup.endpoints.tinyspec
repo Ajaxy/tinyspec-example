@@ -1,0 +1,4 @@
+Client endpoints:
+    // **Create** guest _user_ and _company_
+    POST /signup/guest
+        => {token, user: UserClientSelf}

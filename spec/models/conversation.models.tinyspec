@@ -1,0 +1,1 @@
+Conversation {id: i, name, externalId, companyId?: i, userId?: i, facebookId?, slackId?, slackTeamId?, coverUrl?, isAnswered: b, firstUnansweredMessageAt?: d, lastMessageAt?: d, createdAt: d, updatedAt: d}

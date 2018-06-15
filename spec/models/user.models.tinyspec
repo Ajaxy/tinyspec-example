@@ -1,0 +1,2 @@
+UserSafeData {sendBirdAccessToken}
+UserClientSelf {id: i, role: integer, sendBirdId, safeData: UserSafeData, email?, phoneNumber?, firstName?, lastName?, idName?, avatar?, card?, nric?, nationality?, nickname?, documentNumber?, documentType?, birthdate?: d, sex?, residentialAddress?: i, companiesOrder?}

@@ -1,0 +1,11 @@
+Agent endpoints:
+    // **List** and search _companies_
+    @token GET /companies (agent)?filter?:CompanyFilter&search?&page?:i&perPage?:i&sort?
+        => {companies: Company[], totalCount: i}
+
+    @token $CRUD /companies
+
+Client endpoints:
+    // **List** all own _companies_
+    @token GET /companies (client)
+        => {companies: Company[]}
